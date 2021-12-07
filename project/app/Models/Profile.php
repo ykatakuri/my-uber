@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Profile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
-
-    /*
-    public function cart(){
-        return $this->hasOne('Cart');
-    }
-    */
+    protected $fillable = [
+        'client_id',
+        'address',
+        'phone'
+    ];
 }

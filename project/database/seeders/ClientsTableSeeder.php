@@ -18,9 +18,10 @@ class ClientsTableSeeder extends Seeder
             array(
             array(
             'name' => 'John Doe',
-            'address' => '2 rue de Lespinet, Toulouse',
-            'phone' => '+330605040302',
             ),
+            array(
+                'name' => 'Janette Doe',
+                ),
             )
             );
 

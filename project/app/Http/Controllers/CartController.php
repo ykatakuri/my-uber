@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Client;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class ProductController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Cart::all();
     }
 
     /**
@@ -33,19 +36,22 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'price' => 'required',
-        ]);
-
-        Product::create([
-            'name' => request('name'),
-            'price' => request('price'),
-        ]);
-        
-        return 'Produit ajouté.';
+        $client = Client::findOrFail($request->client_id);
+        $product = Product::findOrFail($request->product_id);
+        $cart = Cart::where('client_id', '=', $client->id);
+        if ($cart->exists()) {
+            DB::table('cart_product')->insert(['cart_id' => $client->id, 'product_id' => $product->id,]);
+            
+            return "Produit ajouté au panier existant.";
+        }
+        else{
+            Cart::create(["client_id" => $client->id]);
+            DB::table('cart_product')->insert(['cart_id' => $client->id, 'product_id' => $product->id,]);
+            
+            return "Panier créé et produit ajouté";
+        }
     }
 
     /**
@@ -54,9 +60,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cart $cart)
     {
-        //
+        foreach ($cart->products as $product) {
+            echo $product;
+        }
     }
 
     /**

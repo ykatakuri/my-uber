@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Profile::all();
     }
 
     /**
@@ -33,19 +33,11 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'price' => 'required',
-        ]);
-
-        Product::create([
-            'name' => request('name'),
-            'price' => request('price'),
-        ]);
+        $profile = Profile::create(["client_id" => $request->client_id, "address" => $request->address, "phone" => $request->phone]);
         
-        return 'Produit ajouté.';
+        return "Profil créé";
     }
 
     /**

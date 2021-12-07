@@ -20,7 +20,15 @@ class ProductsTableSeeder extends Seeder
             'name' => 'Pizza méditéranéenne',
             'price' => 10,
             ),
-            )
+            array(
+                'name' => 'Tacos',
+                'price' => 5,
+                ),
+                array(
+                    'name' => 'Kebab',
+                    'price' => 5,
+                    ),
+            ),
             );
     }
 }

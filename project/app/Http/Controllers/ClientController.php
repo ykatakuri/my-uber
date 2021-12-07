@@ -37,15 +37,13 @@ class ClientController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
         ]);
 
-        return Client::create([
+        Client::create([
             'name' => request('name'),
-            'address' => request('address'),
-            'phone' => request('phone'),
         ]);
+
+        return 'Informations sur le client ajoutées.';
     }
 
     /**
@@ -54,9 +52,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        //$nom = User::first()->contact()->first()->nom;
     }
 
     /**

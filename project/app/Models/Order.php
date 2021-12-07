@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
-
-    /*
-    public function cart(){
-        return $this->hasOne('Cart');
-    }
-    */
+    protected $fillable = [
+        'cart_id',
+        'order_status'
+    ];
 }
